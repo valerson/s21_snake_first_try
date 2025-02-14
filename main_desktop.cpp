@@ -8,7 +8,6 @@ using namespace std;
 int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
-    // cout << "Hello World!" << endl;
     s21::desktop brick_game;
 
     brick_game.show();

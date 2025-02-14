@@ -54,11 +54,13 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../../brick_game/snake/s21_snake.cpp \
 		../../gui/desktop/s21_desktop.cpp \
-		../../main_desktop.cpp 
+		../../main_desktop.cpp qrc_resorce.cpp
 OBJECTS       = s21_snake.o \
 		s21_desktop.o \
-		main_desktop.o
-DIST          = /Users/valerasomov/QT/6.8.2/macos/mkspecs/features/spec_pre.prf \
+		main_desktop.o \
+		qrc_resorce.o
+DIST          = ../../resource/background.jpg \
+		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/spec_pre.prf \
 		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/device_config.prf \
 		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/unix.conf \
 		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/mac.conf \
@@ -557,6 +559,7 @@ Makefile: ../../SnakeFirstTry.pro /Users/valerasomov/QT/6.8.2/macos/mkspecs/macx
 		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/yacc.prf \
 		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/lex.prf \
 		../../SnakeFirstTry.pro \
+		../../resorce.qrc \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Resources/QtGui.prl \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Resources/QtCore.prl
@@ -797,6 +800,7 @@ Makefile: ../../SnakeFirstTry.pro /Users/valerasomov/QT/6.8.2/macos/mkspecs/macx
 /Users/valerasomov/QT/6.8.2/macos/mkspecs/features/yacc.prf:
 /Users/valerasomov/QT/6.8.2/macos/mkspecs/features/lex.prf:
 ../../SnakeFirstTry.pro:
+../../resorce.qrc:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Resources/QtGui.prl:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Resources/QtCore.prl:
@@ -824,6 +828,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../../resorce.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../brick_game/snake/s21_snake.h ../../gui/desktop/s21_desktop.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../../brick_game/snake/s21_snake.cpp ../../gui/desktop/s21_desktop.cpp ../../main_desktop.cpp $(DISTDIR)/
 
@@ -852,8 +857,15 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resorce.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resorce.cpp
+qrc_resorce.cpp: ../../resorce.qrc \
+		/Users/valerasomov/QT/6.8.2/macos/libexec/rcc \
+		../../images/logo_s21.jpg \
+		../../images/background.jpg
+	/Users/valerasomov/QT/6.8.2/macos/libexec/rcc -name resorce --no-zstd ../../resorce.qrc -o qrc_resorce.cpp
+
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
 compiler_moc_objc_header_make_all:
@@ -870,7 +882,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: 
+compiler_clean: compiler_rcc_clean 
 
 ####### Compile
 
@@ -879,11 +891,68 @@ s21_snake.o: ../../brick_game/snake/s21_snake.cpp ../../brick_game/snake/s21_sna
 
 s21_desktop.o: ../../gui/desktop/s21_desktop.cpp ../../gui/desktop/s21_desktop.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QPalette \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QMenuBar \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qmenubar.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QMenu \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qmenu.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QAction \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qaction.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsProxyWidget \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsproxywidget.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QString \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qstring.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o s21_desktop.o ../../gui/desktop/s21_desktop.cpp
 
-main_desktop.o: ../../main_desktop.cpp 
+main_desktop.o: ../../main_desktop.cpp /Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QApplication \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../gui/desktop/s21_desktop.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QPalette \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QMenuBar \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qmenubar.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QMenu \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qmenu.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QAction \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qaction.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsProxyWidget \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsproxywidget.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QString \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qstring.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_desktop.o ../../main_desktop.cpp
+
+qrc_resorce.o: qrc_resorce.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resorce.o qrc_resorce.cpp
 
 ####### Install
 

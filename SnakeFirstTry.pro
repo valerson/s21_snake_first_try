@@ -13,3 +13,9 @@ SOURCES += \
 HEADERS += \
     brick_game/snake/s21_snake.h \
     gui/desktop/s21_desktop.h
+
+DISTFILES += \
+    resource/background.jpg
+
+RESOURCES += \
+    resorce.qrc
