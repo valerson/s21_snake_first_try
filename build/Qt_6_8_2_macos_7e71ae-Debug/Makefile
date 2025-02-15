@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=12 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=12 -Wall -Wextra $(DEFINES)
-INCPATH       = -I../../../SnakeFirstTry -I. -I/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Users/valerasomov/QT/6.8.2/macos/mkspecs/macx-clang -F/Users/valerasomov/QT/6.8.2/macos/lib
+INCPATH       = -I../../../SnakeFirstTry -I. -I/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers -I/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/valerasomov/QT/6.8.2/macos/lib/QtNetwork.framework/Headers -I/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Users/valerasomov/Qt/6.8.2/macos/mkspecs/macx-clang -F/Users/valerasomov/QT/6.8.2/macos/lib
 QMAKE         = /Users/valerasomov/QT/6.8.2/macos/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = SnakeFirstTry1.0.0
 DISTDIR = /Users/valerasomov/PROGRAMMING/Cpp/Cpp_study/snake/SnakeFirstTry/build/Qt_6_8_2_macos_7e71ae-Debug/.tmp/SnakeFirstTry1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=12 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/Users/valerasomov/QT/6.8.2/macos/lib
-LIBS          = $(SUBLIBS) -F/Users/valerasomov/QT/6.8.2/macos/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework AGL -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/Users/valerasomov/QT/6.8.2/macos/lib -framework QtWidgets -framework QtMultimedia -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtNetwork -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework AGL -framework OpenGL   
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -60,241 +60,250 @@ OBJECTS       = s21_snake.o \
 		main_desktop.o \
 		qrc_resorce.o
 DIST          = ../../resource/background.jpg \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/spec_pre.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/device_config.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/unix.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/mac.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/macx.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/sanitize.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/gcc-base.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/gcc-base-mac.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/clang.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/clang-mac.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/qconfig.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_freetype.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_libjpeg.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_libpng.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_openxr_loader.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_charts.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_charts_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_concurrent.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_concurrent_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_core.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_core_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_dbus.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_dbus_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designer.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designer_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designercomponents_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_example_icons_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_fb_support_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_freetype_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_gui.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_gui_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_harfbuzz_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_help.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_help_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_jpeg_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssettings.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssettings_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_linguist.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_network.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_network_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_opengl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_opengl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_packetprotocol_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_png_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_printsupport.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_printsupport_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatch_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qml.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qml_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmldebug_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmldom_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlls_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltest.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltest_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3d.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3d_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dglslparser_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickeffects_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickparticles_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickshapes_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_shadertools.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_shadertools_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_sql.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_sql_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svg.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svg_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_testlib.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_testlib_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_tools_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uiplugin.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uitools.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uitools_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_widgets.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_widgets_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_xml.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_xml_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinbluetoothpermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincalendarpermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincamerapermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincontactspermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinlocationpermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinmicrophonepermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt_functions.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt_config.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/macx-clang/qmake.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/spec_post.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/device_config.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/unix.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/mac.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/macx.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/sanitize.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/gcc-base.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/gcc-base-mac.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/clang.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/clang-mac.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/qconfig.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_freetype.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_libjpeg.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_libpng.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_openxr_loader.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_charts.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_charts_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_concurrent.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_concurrent_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_core.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_core_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_dbus.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_dbus_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designer.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designer_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designercomponents_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_example_icons_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_fb_support_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_freetype_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_gui.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_gui_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_harfbuzz_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_help.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_help_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_jpeg_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssettings.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssettings_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_linguist.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimedia.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimedia_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediaquick_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_network.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_network_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_opengl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_opengl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_png_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_printsupport.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatch_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qml.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qml_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmldebug_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmldom_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlls_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltest.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltest_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3d.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3d_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dglslparser_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickeffects_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_shadertools.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_shadertools_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_spatialaudio.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_spatialaudio_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_sql.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_sql_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svg.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svg_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_testlib.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_testlib_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_tools_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uiplugin.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uitools.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uitools_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_widgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_widgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_xml.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_xml_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinbluetoothpermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincalendarpermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincamerapermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincontactspermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinlocationpermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinmicrophonepermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt_functions.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt_config.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/macx-clang/qmake.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/spec_post.prf \
 		../../.qmake.stash \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/exclusive_builds.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/sdk.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/toolchain.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/toolchain.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/default_pre.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/default_pre.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resolve_config.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/default_post.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/default_post.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/objective_c.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qml_debug.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/mac.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/warn_on.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/permissions.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resources_functions.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resources.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/moc.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/unix/opengl.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/uic.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/unix/thread.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qmake_use.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/file_copies.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/rez.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/asset_catalogs.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/testcase_targets.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/exceptions.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/yacc.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/lex.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/exclusive_builds.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/sdk.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/toolchain.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/toolchain.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/default_pre.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/default_pre.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resolve_config.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/default_post.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/default_post.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/objective_c.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qml_debug.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/mac.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/warn_on.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/permissions.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resources_functions.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resources.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/moc.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/unix/opengl.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/uic.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/unix/thread.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qmake_use.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/file_copies.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/rez.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/asset_catalogs.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/testcase_targets.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/exceptions.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/yacc.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/lex.prf \
 		../../../../SnakeFirstTry.pro ../../brick_game/snake/s21_snake.h \
 		../../gui/desktop/s21_desktop.h ../../brick_game/snake/s21_snake.cpp \
 		../../gui/desktop/s21_desktop.cpp \
@@ -315,7 +324,7 @@ EXPORT_ARCH_ARGS = $(foreach arch, $(if $(EXPORT_ARCHS), $(EXPORT_ARCHS), $(EXPO
 EXPORT__PRO_FILE_ = /Users/valerasomov/PROGRAMMING/Cpp/Cpp_study/snake/SnakeFirstTry/SnakeFirstTry.pro
 
 
-include /Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/sdk.mk
+include /Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
@@ -323,486 +332,508 @@ SnakeFirstTry.app/Contents/MacOS/SnakeFirstTry:  $(OBJECTS)
 	@test -d SnakeFirstTry.app/Contents/MacOS/ || mkdir -p SnakeFirstTry.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
-Makefile: ../../SnakeFirstTry.pro /Users/valerasomov/QT/6.8.2/macos/mkspecs/macx-clang/qmake.conf /Users/valerasomov/QT/6.8.2/macos/mkspecs/features/spec_pre.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/device_config.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/unix.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/mac.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/macx.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/sanitize.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/gcc-base.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/gcc-base-mac.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/clang.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/clang-mac.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/qconfig.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_freetype.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_libjpeg.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_libpng.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_openxr_loader.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_charts.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_charts_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_concurrent.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_concurrent_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_core.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_core_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_dbus.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_dbus_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designer.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designer_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designercomponents_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_example_icons_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_fb_support_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_freetype_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_gui.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_gui_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_harfbuzz_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_help.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_help_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_jpeg_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssettings.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssettings_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_linguist.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_network.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_network_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_opengl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_opengl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_packetprotocol_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_png_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_printsupport.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_printsupport_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatch_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qml.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qml_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmldebug_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmldom_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlls_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltest.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltest_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3d.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3d_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dglslparser_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickeffects_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickparticles_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickshapes_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_shadertools.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_shadertools_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_sql.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_sql_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svg.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svg_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_testlib.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_testlib_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_tools_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uiplugin.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uitools.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uitools_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_widgets.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_widgets_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_xml.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_xml_private.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinbluetoothpermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincalendarpermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincamerapermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincontactspermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinlocationpermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinmicrophonepermission.pri \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt_functions.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt_config.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/macx-clang/qmake.conf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/spec_post.prf \
+Makefile: ../../SnakeFirstTry.pro /Users/valerasomov/Qt/6.8.2/macos/mkspecs/macx-clang/qmake.conf /Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/device_config.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/unix.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/mac.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/macx.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/sanitize.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/gcc-base.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/gcc-base-mac.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/clang.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/clang-mac.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/qconfig.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_freetype.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_libjpeg.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_libpng.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_openxr_loader.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_charts.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_charts_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_concurrent.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_concurrent_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_core.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_core_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_dbus.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_dbus_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designer.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designer_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designercomponents_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_example_icons_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_fb_support_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_freetype_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_gui.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_gui_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_harfbuzz_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_help.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_help_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_jpeg_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssettings.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssettings_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_linguist.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimedia.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimedia_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediaquick_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_network.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_network_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_opengl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_opengl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_png_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_printsupport.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatch_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qml.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qml_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmldebug_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmldom_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlls_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltest.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltest_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3d.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3d_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dglslparser_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickeffects_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_shadertools.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_shadertools_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_spatialaudio.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_spatialaudio_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_sql.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_sql_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svg.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svg_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_testlib.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_testlib_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_tools_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uiplugin.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uitools.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uitools_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_widgets.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_widgets_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_xml.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_xml_private.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinbluetoothpermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincalendarpermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincamerapermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincontactspermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinlocationpermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinmicrophonepermission.pri \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt_functions.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt_config.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/macx-clang/qmake.conf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/spec_post.prf \
 		.qmake.stash \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/exclusive_builds.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/sdk.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/toolchain.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/toolchain.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/default_pre.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/default_pre.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resolve_config.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/default_post.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/default_post.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/objective_c.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qml_debug.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/mac.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/warn_on.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/permissions.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resources_functions.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resources.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/moc.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/unix/opengl.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/uic.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/unix/thread.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qmake_use.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/file_copies.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/rez.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/asset_catalogs.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/testcase_targets.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/exceptions.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/yacc.prf \
-		/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/lex.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/exclusive_builds.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/sdk.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/toolchain.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/toolchain.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/default_pre.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/default_pre.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resolve_config.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/default_post.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/default_post.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/objective_c.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qml_debug.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/mac.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/warn_on.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/permissions.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resources_functions.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resources.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/moc.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/unix/opengl.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/uic.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/unix/thread.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qmake_use.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/file_copies.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/rez.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/asset_catalogs.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/testcase_targets.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/exceptions.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/yacc.prf \
+		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/lex.prf \
 		../../SnakeFirstTry.pro \
 		../../resorce.qrc \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Resources/QtMultimedia.prl \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Resources/QtGui.prl \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtNetwork.framework/Resources/QtNetwork.prl \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Resources/QtCore.prl
 	$(QMAKE) -o Makefile ../../SnakeFirstTry.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/spec_pre.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/device_config.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/unix.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/mac.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/macx.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/sanitize.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/gcc-base.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/gcc-base-mac.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/clang.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/common/clang-mac.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/qconfig.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_freetype.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_libjpeg.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_libpng.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_ext_openxr_loader.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_charts.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_charts_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_concurrent.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_concurrent_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_core.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_core_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_dbus.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_dbus_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designer.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designer_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_designercomponents_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_example_icons_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_fb_support_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_freetype_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_gui.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_gui_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_harfbuzz_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_help.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_help_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_jpeg_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssettings.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssettings_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_linguist.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_network.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_network_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_opengl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_opengl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_packetprotocol_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_png_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_printsupport.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_printsupport_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatch_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qml.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qml_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmldebug_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmldom_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlls_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltest.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltest_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3d.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3d_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dglslparser_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quick_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickeffects_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickparticles_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickshapes_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_shadertools.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_shadertools_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_sql.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_sql_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svg.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svg_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_testlib.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_testlib_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_tools_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uiplugin.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uitools.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_uitools_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_widgets.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_widgets_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_xml.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_lib_xml_private.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinbluetoothpermission.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincalendarpermission.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincamerapermission.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincontactspermission.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinlocationpermission.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinmicrophonepermission.pri:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt_functions.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt_config.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/macx-clang/qmake.conf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/spec_post.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/device_config.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/unix.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/mac.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/macx.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/sanitize.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/gcc-base.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/gcc-base-mac.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/clang.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/clang-mac.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/qconfig.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_freetype.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_libjpeg.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_libpng.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_ext_openxr_loader.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_charts.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_charts_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_chartsqml_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_concurrent.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_concurrent_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_core.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_core_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_dbus.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_dbus_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designer.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designer_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_designercomponents_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_example_icons_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_fb_support_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_freetype_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_gui.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_gui_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_harfbuzz_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_help.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_help_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_jpeg_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsanimation_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsplatform_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labsqmlmodels_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssettings.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssettings_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labssharedimage_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_linguist.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimedia.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimedia_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediaquick_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediawidgets.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_network.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_network_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_opengl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_opengl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_openglwidgets_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_packetprotocol_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_png_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_printsupport.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_printsupport_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatch_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qml.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qml_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcompiler_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlcore_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmldebug_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmldom_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlintegration_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmllocalstorage_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlls_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmeta_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlmodels_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlnetwork_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltest.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltest_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlworkerscript_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3d.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3d_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetimport_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dassetutils_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3deffects_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dglslparser_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpers_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dhelpersimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3diblbaker_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticleeffects_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dparticles_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3druntimerender_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dutils_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick3dxr_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quick_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2iosstyleimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2macosstyleimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2material_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickeffects_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicklayouts_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickparticles_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickshapes_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimeline_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quicktimelineblendtrees_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimage_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_quickwidgets_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_shadertools.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_shadertools_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_spatialaudio.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_spatialaudio_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_sql.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_sql_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svg.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svg_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_svgwidgets_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_testlib.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_testlib_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_tools_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uiplugin.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uitools.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_uitools_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_widgets.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_widgets_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_xml.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_lib_xml_private.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinbluetoothpermission.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincalendarpermission.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincamerapermission.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwincontactspermission.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinlocationpermission.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/modules/qt_plugin_qdarwinmicrophonepermission.pri:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt_functions.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt_config.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/macx-clang/qmake.conf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/spec_post.prf:
 .qmake.stash:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/exclusive_builds.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/sdk.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/toolchain.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/toolchain.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/default_pre.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/default_pre.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resolve_config.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/default_post.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/default_post.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/objective_c.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qml_debug.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/mac.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/warn_on.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/permissions.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qt.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resources_functions.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/resources.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/moc.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/unix/opengl.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/uic.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/unix/thread.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/qmake_use.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/file_copies.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/rez.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/mac/asset_catalogs.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/testcase_targets.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/exceptions.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/yacc.prf:
-/Users/valerasomov/QT/6.8.2/macos/mkspecs/features/lex.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/exclusive_builds.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/sdk.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/toolchain.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/toolchain.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/default_pre.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/default_pre.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resolve_config.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/default_post.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/default_post.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/objective_c.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qml_debug.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/mac.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/warn_on.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/permissions.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qt.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resources_functions.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/resources.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/moc.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/unix/opengl.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/uic.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/unix/thread.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/qmake_use.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/file_copies.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/rez.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/mac/asset_catalogs.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/testcase_targets.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/exceptions.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/yacc.prf:
+/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/lex.prf:
 ../../SnakeFirstTry.pro:
 ../../resorce.qrc:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl:
+/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Resources/QtMultimedia.prl:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Resources/QtGui.prl:
+/Users/valerasomov/QT/6.8.2/macos/lib/QtNetwork.framework/Resources/QtNetwork.prl:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Resources/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../../SnakeFirstTry.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
@@ -816,7 +847,7 @@ SnakeFirstTry.app/Contents/PkgInfo:
 SnakeFirstTry.app/Contents/Info.plist: 
 	@test -d SnakeFirstTry.app/Contents || mkdir -p SnakeFirstTry.app/Contents
 	@$(DEL_FILE) SnakeFirstTry.app/Contents/Info.plist
-	@plutil -convert xml1 -o - /Users/valerasomov/QT/6.8.2/macos/mkspecs/macx-clang/Info.plist.app | sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,\$${QMAKE_SHORT_VERSION},1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,\$${QMAKE_FULL_VERSION},1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" -e "s,@BUNDLEIDENTIFIER@,com.yourcompany.SnakeFirstTry,g" -e "s,\$${PRODUCT_BUNDLE_IDENTIFIER},com.yourcompany.SnakeFirstTry,g" -e "s,\$${MACOSX_DEPLOYMENT_TARGET},12,g" -e "s,\$${IPHONEOS_DEPLOYMENT_TARGET},,g" -e "s,\$${TVOS_DEPLOYMENT_TARGET},,g" -e "s,\$${WATCHOS_DEPLOYMENT_TARGET},,g" -e "s,\$${IOS_LAUNCH_SCREEN},LaunchScreen,g" -e "s,@ICON@,,g" -e "s,\$${ASSETCATALOG_COMPILER_APPICON_NAME},,g" -e "s,@EXECUTABLE@,SnakeFirstTry,g" -e "s,@LIBRARY@,SnakeFirstTry,g" -e "s,\$${EXECUTABLE_NAME},SnakeFirstTry,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" >SnakeFirstTry.app/Contents/Info.plist
+	@plutil -convert xml1 -o - /Users/valerasomov/Qt/6.8.2/macos/mkspecs/macx-clang/Info.plist.app | sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,\$${QMAKE_SHORT_VERSION},1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,\$${QMAKE_FULL_VERSION},1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" -e "s,@BUNDLEIDENTIFIER@,com.yourcompany.SnakeFirstTry,g" -e "s,\$${PRODUCT_BUNDLE_IDENTIFIER},com.yourcompany.SnakeFirstTry,g" -e "s,\$${MACOSX_DEPLOYMENT_TARGET},12,g" -e "s,\$${IPHONEOS_DEPLOYMENT_TARGET},,g" -e "s,\$${TVOS_DEPLOYMENT_TARGET},,g" -e "s,\$${WATCHOS_DEPLOYMENT_TARGET},,g" -e "s,\$${IOS_LAUNCH_SCREEN},LaunchScreen,g" -e "s,@ICON@,,g" -e "s,\$${ASSETCATALOG_COMPILER_APPICON_NAME},,g" -e "s,@EXECUTABLE@,SnakeFirstTry,g" -e "s,@LIBRARY@,SnakeFirstTry,g" -e "s,\$${EXECUTABLE_NAME},SnakeFirstTry,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" >SnakeFirstTry.app/Contents/Info.plist
 
 all: Makefile \
 		SnakeFirstTry.app/Contents/PkgInfo \
@@ -861,10 +892,11 @@ compiler_rcc_make_all: qrc_resorce.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resorce.cpp
 qrc_resorce.cpp: ../../resorce.qrc \
-		/Users/valerasomov/QT/6.8.2/macos/libexec/rcc \
+		/Users/valerasomov/Qt/6.8.2/macos/libexec/rcc \
 		../../images/logo_s21.jpg \
-		../../images/background.jpg
-	/Users/valerasomov/QT/6.8.2/macos/libexec/rcc -name resorce --no-zstd ../../resorce.qrc -o qrc_resorce.cpp
+		../../images/background.jpg \
+		../../audio/intro.wav
+	/Users/valerasomov/Qt/6.8.2/macos/libexec/rcc -name resorce --no-zstd ../../resorce.qrc -o qrc_resorce.cpp
 
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
@@ -948,7 +980,9 @@ main_desktop.o: ../../main_desktop.cpp /Users/valerasomov/QT/6.8.2/macos/lib/QtW
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QString \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qstring.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
-		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_desktop.o ../../main_desktop.cpp
 
 qrc_resorce.o: qrc_resorce.cpp 

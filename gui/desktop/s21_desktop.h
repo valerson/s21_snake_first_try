@@ -26,6 +26,9 @@
 
 #include <QPixmap> /// Для укарашательства
 
+
+
+
 /*размеры клетки*/
 #define PIXEL_WIDTH 20
 #define PIXEL_HEIGHT 20
@@ -62,7 +65,6 @@ public:
     game_button(QWidget *widget);
 
     QPushButton * moveButton(QString symbol, bool isRotate=false);
-    // QPushButton * rotateButton();
     void positionButton(QGraphicsProxyWidget * left_widget, QGraphicsProxyWidget * right_widget,
                             QGraphicsProxyWidget * center_widget, QGraphicsProxyWidget * up_widget,
                             QGraphicsProxyWidget * down_widget, QGraphicsProxyWidget * rotate_widget,

@@ -2,7 +2,8 @@
 # CONFIG += console c++17
 # CONFIG -= app_bundle
 # CONFIG -= qt
-QT += widgets # подключили возможность работы с QWidget
+QT += widgets # подключил для возможности работы с QWidget
+QT += multimedia #подключил для музыки в играх
 
 
 SOURCES += \
