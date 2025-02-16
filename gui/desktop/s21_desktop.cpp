@@ -35,16 +35,32 @@ namespace s21{
         /* Создаем слой для размещения кнопок и дисплея */
         QVBoxLayout *layout = new QVBoxLayout(this);
 
+        /* подключение контроллера */
+        control = new controller();
+        control->sound_intro();
 
         /* установка дисплея */
+
         display *monitor = new display(this);
         layout->addWidget(monitor, 0, Qt::AlignHCenter); /// размещение по центру виджета по горизонтали
+        // monitor->startPic();
+
+        QWidget *monitorEdge = new QWidget(this);
+        monitorEdge->setStyleSheet("background-color: grey;");
+        monitorEdge->setFixedSize(DISPLAY_WIDTH + 100, DISPLAY_HEIGHT + 1.5 * PIXEL_HEIGHT);
+
+        QVBoxLayout *monitorLayout = new QVBoxLayout(monitorEdge);
+        monitorLayout->setAlignment(Qt::AlignCenter);
+        monitorLayout->addWidget(monitor);
+        layout->addWidget(monitorEdge, 0, Qt::AlignHCenter);
 
         /* установка кнопок */
-        game_button *GameButton = new game_button(this);
+        game_button *GameButton = new game_button(this, control);
         layout->addWidget(GameButton, 0, Qt::AlignHCenter);
 
         setLayout(layout);/// Устанавливаем макет
+
+
     }
 
     void desktop::setMenuBar(){
@@ -69,22 +85,65 @@ namespace s21{
         connect(aboutAct, &QAction::triggered, this, [label]() { label->show(); });
     };
 
+    void desktop::keyPressEvent(QKeyEvent *Key){
+        if (Key->key()==Qt::Key_M)
+        {
+            control->sound_mute();
+        };
+        if (Key->key()==Qt::Key_P)
+        {
+            control->pause();
+        };
+        if (Key->key()==Qt::Key_Q)
+        {
+            control->quit();
+        };
+        if (Key->key()==Qt::Key_Space)
+        {
+            control->press_rotate();
+        };
+        if (Key->key()==Qt::Key_Left)
+        {
+            control->press_left();
+        };
+        if (Key->key()==Qt::Key_Right)
+        {
+            control->press_right();
+        };
+        if (Key->key()==Qt::Key_Up)
+        {
+            control->press_up();
+        };
+        if (Key->key()==Qt::Key_Down)
+        {
+            control->press_down();
+        };
+        if (Key->key()==Qt::Key_D)
+        {
+            control->press_down();
+        };
+    };
 
     display::display(QWidget *widget){
         QGraphicsScene *display =new QGraphicsScene(widget);
         setScene(display);
+        // startGif();
 
         /// устанавливаем цвет и размер этого виджета
-        setBackgroundBrush(QBrush(Qt::darkGray));
-        setFixedSize(DISPLAY_WIDTH+100, DISPLAY_HEIGHT+30);
-
-        /// добавляем прямоугольник (экран GameBoy) внутри виджета
-        display->addRect(95, 25, DISPLAY_WIDTH, DISPLAY_HEIGHT, QPen(Qt::black), QBrush(Qt::black));
+        setBackgroundBrush(QBrush(Qt::black));
+        setFixedSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
     };
 
+    void display::startGif(){
+        QMovie *startGif=new QMovie(":/gif/gif/snake_tetris.gif");
+        QLabel *this_label = new QLabel(this);
+        this_label->setMovie(startGif);
+        startGif->start();
+    };
 
-    game_button::game_button(QWidget *widget) {
+
+    game_button::game_button(QWidget *widget, controller *control) {
         /// создаём сцену
         QGraphicsScene *scene = new QGraphicsScene(widget);
         setScene(scene);
@@ -94,33 +153,33 @@ namespace s21{
 
 
         /// создаём кнопки
-        QPushButton *left = moveButton("←");
+        QPushButton *left = moveButtonStyle("←");
         QGraphicsProxyWidget * left_widget = scene->addWidget(left);
-        QPushButton *right = moveButton("→");
+        QPushButton *right = moveButtonStyle("→");
         QGraphicsProxyWidget * right_widget = scene->addWidget(right);
-        QPushButton *up = moveButton("↑");
+        QPushButton *up = moveButtonStyle("↑");
         QGraphicsProxyWidget * up_widget = scene->addWidget(up);
-        QPushButton *down = moveButton("↓");
+        QPushButton *down = moveButtonStyle("↓");
         QGraphicsProxyWidget * down_widget = scene->addWidget(down);
-        QPushButton *center = moveButton(" ");
+        QPushButton *center = moveButtonStyle(" ");
         QGraphicsProxyWidget * center_widget = scene->addWidget(center);
-        QPushButton *rotate=moveButton("rotate", true);
+        QPushButton *rotate=moveButtonStyle("rotate\n(space)", true);
         QGraphicsProxyWidget * rotate_widget = scene->addWidget(rotate);
-        QPushButton *pause = menuButton();
+        QPushButton *pause = menuButtonStyle();
         QGraphicsProxyWidget * pause_widget = scene->addWidget(pause);
-        QPushButton *mute = menuButton();
+        QPushButton *mute = menuButtonStyle();
         QGraphicsProxyWidget * mute_widget = scene->addWidget(mute);
-        QPushButton *on_off = menuButton(true);
+        QPushButton *on_off = menuButtonStyle(true);
         QGraphicsProxyWidget * on_off_widget = scene->addWidget(on_off);
 
 
 
         /// Перемещаем кнопки внутри сцены
-        positionButton(left_widget,right_widget, center_widget, up_widget, down_widget, rotate_widget, pause_widget,mute_widget, on_off_widget);
+        positionButton(left_widget,right_widget, center_widget, up_widget, down_widget, rotate_widget, pause_widget, mute_widget, on_off_widget);
 
 
         /// выполнение при нажатии
-        workButton(left, right,  up, down, rotate, widget, pause, mute, on_off);
+        workButton(left, right,  up, down, rotate, pause, mute, on_off, control);
 
         /// украшательства
         /// логотип
@@ -133,7 +192,7 @@ namespace s21{
 
     };
 
-    QPushButton * game_button::moveButton(QString symbol, bool isRotate){
+    QPushButton * game_button::moveButtonStyle(QString symbol, bool isRotate){
         QPushButton *button = new QPushButton(symbol);
         if (isRotate)
         {
@@ -159,7 +218,7 @@ namespace s21{
     };
 
 
-    QPushButton * game_button::menuButton(bool on_off){
+    QPushButton * game_button::menuButtonStyle(bool on_off){
         QPushButton *button = new QPushButton();
         button->setFixedSize(RADIUS, RADIUS);
         if (on_off)
@@ -181,14 +240,14 @@ namespace s21{
 
 
     void game_button::positionButton(QGraphicsProxyWidget * left_widget,
-                                         QGraphicsProxyWidget * right_widget,
-                                         QGraphicsProxyWidget * center_widget,
-                                         QGraphicsProxyWidget * up_widget,
-                                         QGraphicsProxyWidget * down_widget,
-                                         QGraphicsProxyWidget * rotate_widget,
-                                         QGraphicsProxyWidget * pause_widget,
-                                         QGraphicsProxyWidget * mute_widget,
-                                         QGraphicsProxyWidget * on_off_widget){
+                                     QGraphicsProxyWidget * right_widget,
+                                     QGraphicsProxyWidget * center_widget,
+                                     QGraphicsProxyWidget * up_widget,
+                                     QGraphicsProxyWidget * down_widget,
+                                     QGraphicsProxyWidget * rotate_widget,
+                                     QGraphicsProxyWidget * pause_widget,
+                                     QGraphicsProxyWidget * mute_widget,
+                                     QGraphicsProxyWidget * on_off_widget){
         left_widget->setPos(COORD_X_CENTER, COORD_Y_CENTER);
         center_widget->setPos(COORD_X_CENTER+W_BUTTON, COORD_Y_CENTER);
         right_widget->setPos(COORD_X_CENTER+W_BUTTON+W_BUTTON, COORD_Y_CENTER);
@@ -201,21 +260,21 @@ namespace s21{
         on_off_widget->setPos(COORD_X_START+60+60, COORD_Y_START);
 
 
-        QLabel * name_pause = new QLabel("pause");
+        QLabel * name_pause = new QLabel("pause\n   (P)");
         name_pause->setStyleSheet("background-color: transparent;"
                                   "color: black;"
                                   "font-weight: bold;");
         QGraphicsProxyWidget * name_pause_widge = scene()->addWidget(name_pause);
-        name_pause_widge->setPos(COORD_X_START - 4, COORD_Y_START + 30);
+        name_pause_widge->setPos(COORD_X_START - 8, COORD_Y_START + 30);
 
-        QLabel * name_mute = new QLabel("mute");
+        QLabel * name_mute = new QLabel("mute\n (M)");
         name_mute->setStyleSheet("background-color: transparent;"
                                   "color: black;"
                                   "font-weight: bold;");
         QGraphicsProxyWidget * name_mute_widge = scene()->addWidget(name_mute);
-        name_mute_widge->setPos(COORD_X_START + 60 - 2, COORD_Y_START + 30);
+        name_mute_widge->setPos(COORD_X_START + 60 - 6, COORD_Y_START + 30);
 
-        QLabel * name_on_off = new QLabel("on_off");
+        QLabel * name_on_off = new QLabel("quit\n (Q)");
         name_on_off->setStyleSheet("background-color: transparent;"
                                   "color: black;"
                                   "font-weight: bold;");
@@ -226,27 +285,18 @@ namespace s21{
     };
 
 
-    void game_button::workButton(QPushButton *left, QPushButton *right, QPushButton *up, QPushButton *down, QPushButton *rotate,
-                                     QWidget * widget, QPushButton *pause, QPushButton *mute, QPushButton * on_off){
-        QLabel * label_left = new QLabel("LEFT!!!!");
-        QLabel * label_right = new QLabel("RIGHT!!!!");
-        QLabel * label_up = new QLabel("UP!!!!");
-        QLabel * label_down = new QLabel("DOWN!!!!");
-        QLabel * label_rotate = new QLabel("ROTATE!!!!");
-        QLabel * label_pause = new QLabel("pause");
-        QLabel * label_mute = new QLabel("mute");
-        QLabel * label_on_off = new QLabel("on_off");
+    void game_button::workButton(QPushButton *left, QPushButton *right, QPushButton *up, QPushButton *down,
+                                 QPushButton *rotate, QPushButton *pause, QPushButton *mute, QPushButton * on_off, controller *control){
 
+        connect(left, &QPushButton::clicked, control, &controller::press_left);
+        connect(right, &QPushButton::clicked, control, &controller::press_right);
+        connect(up, &QPushButton::clicked, control, &controller::press_up);
+        connect(down, &QPushButton::clicked, control, &controller::press_down);
+        connect(rotate, &QPushButton::clicked, control, &controller::press_rotate);
 
-        connect(left, &QPushButton::clicked, widget, [label_left]() { label_left->show(); });
-        connect(right, &QPushButton::clicked, widget, [label_right]() { label_right->show(); });
-        connect(up, &QPushButton::clicked, widget, [label_up]() { label_up->show(); });
-        connect(down, &QPushButton::clicked, widget, [label_down]() { label_down->show(); });
-        connect(rotate, &QPushButton::clicked, widget, [label_rotate]() { label_rotate->show(); });
-
-        connect(pause, &QPushButton::clicked, widget, [label_pause]() { label_pause->show(); });
-        connect(mute, &QPushButton::clicked, widget, [label_mute]() { label_mute->show(); });
-        connect(on_off, &QPushButton::clicked, widget, [label_on_off]() { label_on_off->show(); });
+        connect(pause, &QPushButton::clicked, control, &controller::pause);
+        connect(mute, &QPushButton::clicked, control, &controller::sound_mute);
+        connect(on_off, &QPushButton::clicked, control, &controller::quit);
     };
 
 

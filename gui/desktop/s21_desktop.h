@@ -9,24 +9,26 @@
 #include <QMenu>
 #include <QAction>
 
-#include <QLabel>
+#include <QLabel> /// Для тестов
 
 #include <QPushButton> /// добавдение кнопок
 
-#include <QVBoxLayout> /// для подписи кнопок Выстраивает виджеты вертикально
-
-#include <QHBoxLayout>///Выстраивает виджеты горизонтально
+#include <QVBoxLayout> ///  Выстраивает виджеты вертикально (для подписи кнопок)
+#include <QHBoxLayout> /// Выстраивает виджеты горизонтально
 
 #include <QGraphicsScene> /// для отрисовки полей в приложениb - в том числе дисплея и в дисплее
 #include <QGraphicsView> /// как родитель для QGraphicScene
+#include <QGraphicsProxyWidget> /// для добавления в сцену виджетов
 
-#include <QGraphicsProxyWidget>
+#include <QString> /// тип std::string в QT
 
-#include <QString>
+#include <QPixmap> /// Для украшательства (картинки вставлять)
 
-#include <QPixmap> /// Для укарашательства
+#include <QMovie> /// Для украшательства (для стартовой и конечной гифок)
 
+#include <QKeyEvent> /// для считывания нажатия клавиатуры
 
+#include <controller/controller.h> /// контроллер, лдя соблюдение требований задания - паттерн mvc
 
 
 /*размеры клетки*/
@@ -50,31 +52,37 @@ class desktop: public QWidget{
         desktop();
 
         void setMenuBar();
+        void keyPressEvent(QKeyEvent *event); /// функция считывания нажатия клавиши клавиатуры
+
+    private:
+        controller *control;
     }; /// end class desktop
 
 ///класс display - это класс для визуала игровго дисплея 10х20
 class display: public QGraphicsView{
 public:
     display(QWidget *widget);
+
+    void startGif();
 };///end class display
 
 
 ///класс game_button - это класс для визуала всех кнопок
 class game_button: public QGraphicsView{
 public:
-    game_button(QWidget *widget);
+    game_button(QWidget *widget, controller *control);
 
-    QPushButton * moveButton(QString symbol, bool isRotate=false);
+    QPushButton * moveButtonStyle(QString symbol, bool isRotate=false);
     void positionButton(QGraphicsProxyWidget * left_widget, QGraphicsProxyWidget * right_widget,
-                            QGraphicsProxyWidget * center_widget, QGraphicsProxyWidget * up_widget,
-                            QGraphicsProxyWidget * down_widget, QGraphicsProxyWidget * rotate_widget,
-                            QGraphicsProxyWidget * pause_widget, QGraphicsProxyWidget * mute_widget,
-                            QGraphicsProxyWidget * on_off_widget);
+                        QGraphicsProxyWidget * center_widget, QGraphicsProxyWidget * up_widget,
+                        QGraphicsProxyWidget * down_widget, QGraphicsProxyWidget * rotate_widget,
+                        QGraphicsProxyWidget * pause_widget, QGraphicsProxyWidget * mute_widget,
+                        QGraphicsProxyWidget * on_off_widget);
     void workButton(QPushButton *left, QPushButton *right, QPushButton *up,
-                        QPushButton *down, QPushButton *rotate, QWidget * widget,
-                        QPushButton *pause, QPushButton *mute, QPushButton * on_off);
+                    QPushButton *down, QPushButton *rotate, QPushButton *pause,
+                    QPushButton *mute, QPushButton * on_off, controller *control);
 
-    QPushButton * menuButton(bool on_off=false);
+    QPushButton * menuButtonStyle(bool on_off=false);
 };///end class display
 
 };/// end namespace s21

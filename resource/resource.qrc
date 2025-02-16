@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>images/logo_app.ico</file>
+        <file>images/logo_s21.jpg</file>
+        <file>images/background.jpg</file>
+    </qresource>
+    <qresource prefix="/audio">
+        <file>audio/intro.wav</file>
+    </qresource>
+    <qresource prefix="/gif">
+        <file>gif/snake_tetris.gif</file>
+    </qresource>
+</RCC>

@@ -53,14 +53,15 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../brick_game/snake/s21_snake.cpp \
+		../../controller/controller.cpp \
 		../../gui/desktop/s21_desktop.cpp \
-		../../main_desktop.cpp qrc_resorce.cpp
+		../../main_desktop.cpp qrc_resource.cpp
 OBJECTS       = s21_snake.o \
+		controller.o \
 		s21_desktop.o \
 		main_desktop.o \
-		qrc_resorce.o
-DIST          = ../../resource/background.jpg \
-		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
+		qrc_resource.o
+DIST          = /Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
 		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/device_config.prf \
 		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/unix.conf \
 		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/common/mac.conf \
@@ -305,7 +306,9 @@ DIST          = ../../resource/background.jpg \
 		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/yacc.prf \
 		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/lex.prf \
 		../../../../SnakeFirstTry.pro ../../brick_game/snake/s21_snake.h \
+		../../controller/controller.h \
 		../../gui/desktop/s21_desktop.h ../../brick_game/snake/s21_snake.cpp \
+		../../controller/controller.cpp \
 		../../gui/desktop/s21_desktop.cpp \
 		../../main_desktop.cpp
 QMAKE_TARGET  = SnakeFirstTry
@@ -577,7 +580,7 @@ Makefile: ../../SnakeFirstTry.pro /Users/valerasomov/Qt/6.8.2/macos/mkspecs/macx
 		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/yacc.prf \
 		/Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/lex.prf \
 		../../SnakeFirstTry.pro \
-		../../resorce.qrc \
+		../../resource/resource.qrc \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Resources/QtMultimedia.prl \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Resources/QtGui.prl \
@@ -829,7 +832,7 @@ Makefile: ../../SnakeFirstTry.pro /Users/valerasomov/Qt/6.8.2/macos/mkspecs/macx
 /Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/yacc.prf:
 /Users/valerasomov/Qt/6.8.2/macos/mkspecs/features/lex.prf:
 ../../SnakeFirstTry.pro:
-../../resorce.qrc:
+../../resource/resource.qrc:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Resources/QtMultimedia.prl:
 /Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Resources/QtGui.prl:
@@ -859,9 +862,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../resorce.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../brick_game/snake/s21_snake.h ../../gui/desktop/s21_desktop.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../brick_game/snake/s21_snake.cpp ../../gui/desktop/s21_desktop.cpp ../../main_desktop.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../resource/resource.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../../brick_game/snake/s21_snake.h ../../controller/controller.h ../../gui/desktop/s21_desktop.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../brick_game/snake/s21_snake.cpp ../../controller/controller.cpp ../../gui/desktop/s21_desktop.cpp ../../main_desktop.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -888,15 +891,17 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_resorce.cpp
+compiler_rcc_make_all: qrc_resource.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_resorce.cpp
-qrc_resorce.cpp: ../../resorce.qrc \
+	-$(DEL_FILE) qrc_resource.cpp
+qrc_resource.cpp: ../../resource/resource.qrc \
 		/Users/valerasomov/Qt/6.8.2/macos/libexec/rcc \
-		../../images/logo_s21.jpg \
-		../../images/background.jpg \
-		../../audio/intro.wav
-	/Users/valerasomov/Qt/6.8.2/macos/libexec/rcc -name resorce --no-zstd ../../resorce.qrc -o qrc_resorce.cpp
+		../../resource/images/logo_app.ico \
+		../../resource/images/logo_s21.jpg \
+		../../resource/images/background.jpg \
+		../../resource/gif/snake_tetris.gif \
+		../../resource/audio/intro.wav
+	/Users/valerasomov/Qt/6.8.2/macos/libexec/rcc -name resource --no-zstd ../../resource/resource.qrc -o qrc_resource.cpp
 
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
@@ -920,6 +925,15 @@ compiler_clean: compiler_rcc_clean
 
 s21_snake.o: ../../brick_game/snake/s21_snake.cpp ../../brick_game/snake/s21_snake.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o s21_snake.o ../../brick_game/snake/s21_snake.cpp
+
+controller.o: ../../controller/controller.cpp ../../controller/controller.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../../controller/controller.cpp
 
 s21_desktop.o: ../../gui/desktop/s21_desktop.cpp ../../gui/desktop/s21_desktop.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
@@ -948,7 +962,16 @@ s21_desktop.o: ../../gui/desktop/s21_desktop.cpp ../../gui/desktop/s21_desktop.h
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QString \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qstring.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
-		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QMovie \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qmovie.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QKeyEvent \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
+		../../controller/controller.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o s21_desktop.o ../../gui/desktop/s21_desktop.cpp
 
 main_desktop.o: ../../main_desktop.cpp /Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QApplication \
@@ -981,12 +1004,19 @@ main_desktop.o: ../../main_desktop.cpp /Users/valerasomov/QT/6.8.2/macos/lib/QtW
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qstring.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QMovie \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qmovie.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/QKeyEvent \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
+		../../controller/controller.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
-		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_desktop.o ../../main_desktop.cpp
 
-qrc_resorce.o: qrc_resorce.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resorce.o qrc_resorce.cpp
+qrc_resource.o: qrc_resource.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resource.o qrc_resource.cpp
 
 ####### Install
 

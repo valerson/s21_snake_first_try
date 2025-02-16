@@ -8,15 +8,15 @@ QT += multimedia #подключил для музыки в играх
 
 SOURCES += \
     brick_game/snake/s21_snake.cpp \
+    controller/controller.cpp \
     gui/desktop/s21_desktop.cpp \
     main_desktop.cpp
 
 HEADERS += \
     brick_game/snake/s21_snake.h \
+    controller/controller.h \
     gui/desktop/s21_desktop.h
 
-DISTFILES += \
-    resource/background.jpg
-
 RESOURCES += \
-    resorce.qrc
+    resource/resource.qrc
+
