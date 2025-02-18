@@ -51,8 +51,9 @@ class desktop: public QWidget{
     public:
         desktop();
 
-        void setMenuBar();
+        void setMenuBar(); /// установка менюбар
         void keyPressEvent(QKeyEvent *event); /// функция считывания нажатия клавиши клавиатуры
+        void setAppStyle(); /// утсановка размеров и стиля окна приложения
 
     private:
         controller *control;
@@ -63,7 +64,9 @@ class display: public QGraphicsView{
 public:
     display(QWidget *widget);
 
-    void startGif();
+    void setMonitor(display *monitor, QVBoxLayout *layout, QWidget *monitorEdge); /// установка монитора
+    // void startGif();
+    void startPic();
 };///end class display
 
 

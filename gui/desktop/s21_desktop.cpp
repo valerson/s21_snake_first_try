@@ -17,17 +17,14 @@
 namespace s21{
 
     desktop::desktop() {
-        /* изменили размер приложения */
-        resize(APP_WIDTH, APP_HEIGHT);
-        setWindowTitle("BrickGame v.2.0");
-        setStyleSheet("border: transparent;"); /// Убрал рамки внутри приложения (у виджетов и сцен)
+        setFocus(); /// установка фокуса. без этой штуки не срабатывает считывание стрелок.
 
+        /* подключение контроллера */
+        control = new controller();
+        control->sound_intro();
 
-        /*установка фона приложения*/
-        QPixmap backgroundImage(":/img/images/background.jpg");
-        QPalette pal;
-        pal.setBrush(QPalette::Window, backgroundImage);
-        setPalette(pal);
+        /* изменили размер приложения и его фон */
+        setAppStyle();
 
         /* устанока меню - справка - о программе */
         setMenuBar();
@@ -35,24 +32,10 @@ namespace s21{
         /* Создаем слой для размещения кнопок и дисплея */
         QVBoxLayout *layout = new QVBoxLayout(this);
 
-        /* подключение контроллера */
-        control = new controller();
-        control->sound_intro();
-
         /* установка дисплея */
-
-        display *monitor = new display(this);
-        layout->addWidget(monitor, 0, Qt::AlignHCenter); /// размещение по центру виджета по горизонтали
-        // monitor->startPic();
-
-        QWidget *monitorEdge = new QWidget(this);
-        monitorEdge->setStyleSheet("background-color: grey;");
-        monitorEdge->setFixedSize(DISPLAY_WIDTH + 100, DISPLAY_HEIGHT + 1.5 * PIXEL_HEIGHT);
-
-        QVBoxLayout *monitorLayout = new QVBoxLayout(monitorEdge);
-        monitorLayout->setAlignment(Qt::AlignCenter);
-        monitorLayout->addWidget(monitor);
-        layout->addWidget(monitorEdge, 0, Qt::AlignHCenter);
+        display *monitor = new display(this); /// сам монитор
+        QWidget *monitorEdge = new QWidget(this); /// среая рамка вокруг монитора (чтобы красиво было)
+        monitor->setMonitor(monitor, layout, monitorEdge);
 
         /* установка кнопок */
         game_button *GameButton = new game_button(this, control);
@@ -61,7 +44,26 @@ namespace s21{
         setLayout(layout);/// Устанавливаем макет
 
 
+        // monitor->startGif();
+        // monitor->startPic();
+
+        /* Запуск выбора игры */
+        control->menuStartGame(5000); /// 5 секунд показывается стартовый экран, затем выбор игрый
+
+
     }
+
+    void desktop::setAppStyle(){
+        resize(APP_WIDTH, APP_HEIGHT);
+        setWindowTitle("BrickGame v.2.0");
+        setStyleSheet("border: transparent;"); /// Убрал рамки внутри приложения (у виджетов и сцен)
+
+        /*установка фона приложения*/
+        QPixmap backgroundImage(":/img/images/background.jpg");
+        QPalette pal;
+        pal.setBrush(QPalette::Window, backgroundImage);
+        setPalette(pal);
+    };
 
     void desktop::setMenuBar(){
         /*Меню построено так:
@@ -85,62 +87,70 @@ namespace s21{
         connect(aboutAct, &QAction::triggered, this, [label]() { label->show(); });
     };
 
+    void display::setMonitor(display *monitor, QVBoxLayout *layout, QWidget *monitorEdge){
+        layout->addWidget(monitor, 0, Qt::AlignHCenter); /// размещение по центру виджета по горизонтали
+        monitor->setStyleSheet("border-style: outset;"
+                               "border-width: 2px;"
+                               "border-color: black;");
+
+        monitorEdge->setStyleSheet("background-color: grey;");
+        monitorEdge->setFixedSize(DISPLAY_WIDTH + 100, DISPLAY_HEIGHT + 1.5 * PIXEL_HEIGHT);
+
+        QVBoxLayout *monitorLayout = new QVBoxLayout(monitorEdge);
+        monitorLayout->setAlignment(Qt::AlignCenter);
+        monitorLayout->addWidget(monitor);
+        layout->addWidget(monitorEdge, 0, Qt::AlignHCenter);
+
+    };
+
     void desktop::keyPressEvent(QKeyEvent *Key){
         if (Key->key()==Qt::Key_M)
-        {
             control->sound_mute();
-        };
         if (Key->key()==Qt::Key_P)
-        {
             control->pause();
-        };
         if (Key->key()==Qt::Key_Q)
-        {
             control->quit();
-        };
         if (Key->key()==Qt::Key_Space)
-        {
             control->press_rotate();
-        };
         if (Key->key()==Qt::Key_Left)
-        {
             control->press_left();
-        };
         if (Key->key()==Qt::Key_Right)
-        {
             control->press_right();
-        };
         if (Key->key()==Qt::Key_Up)
-        {
             control->press_up();
-        };
         if (Key->key()==Qt::Key_Down)
-        {
             control->press_down();
-        };
-        if (Key->key()==Qt::Key_D)
-        {
-            control->press_down();
-        };
     };
 
     display::display(QWidget *widget){
         QGraphicsScene *display =new QGraphicsScene(widget);
         setScene(display);
         // startGif();
+        // startPic();
 
         /// устанавливаем цвет и размер этого виджета
         setBackgroundBrush(QBrush(Qt::black));
-        setFixedSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+        setFixedSize(DISPLAY_WIDTH+8, DISPLAY_HEIGHT+8); /// 2 и 2 на рамку с каждой стороны + 4 на пробел - так симпотичнее (пропуск, чтобы дырка была короче между рамкой внешней и внутренней)
+
+        display->addRect(-FIELD_WIDTH,0,FIELD_WIDTH,FIELD_HEIGHT, QPen(Qt::white)); /// само игровое поле
+        display->addRect(0,0,DISPLAY_WIDTH-FIELD_WIDTH,FIELD_HEIGHT, QPen(Qt::white)); /// информационное поле (очки, уровень, скорость и т.п.
 
     };
 
-    void display::startGif(){
-        QMovie *startGif=new QMovie(":/gif/gif/snake_tetris.gif");
+    // void display::startGif(){
+    //     QMovie *startGif=new QMovie(":/gif/gif/snake_tetris.gif");
+    //     QLabel *this_label = new QLabel(this);
+    //     this_label->setMovie(startGif);
+    //     startGif->start();
+    // };
+
+    void display::startPic(){
+        QPixmap StartImage(":/img/images/snake_pic.png");
         QLabel *this_label = new QLabel(this);
-        this_label->setMovie(startGif);
-        startGif->start();
+        this_label->setAlignment(Qt::AlignHCenter);
+        this_label->setPixmap(StartImage);
     };
+
 
 
     game_button::game_button(QWidget *widget, controller *control) {

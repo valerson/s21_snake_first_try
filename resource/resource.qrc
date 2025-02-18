@@ -1,8 +1,11 @@
 <RCC>
     <qresource prefix="/img">
-        <file>images/logo_app.ico</file>
         <file>images/logo_s21.jpg</file>
         <file>images/background.jpg</file>
+        <file>images/logo_app.icns</file>
+        <file>images/start_img_resized.jpg</file>
+        <file>images/start_img.jpg</file>
+        <file>images/snake_pic.png</file>
     </qresource>
     <qresource prefix="/audio">
         <file>audio/intro.wav</file>

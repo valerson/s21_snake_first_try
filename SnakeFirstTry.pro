@@ -20,3 +20,7 @@ HEADERS += \
 RESOURCES += \
     resource/resource.qrc
 
+
+# ICON = resource/logo_app.icns  # пытался изменить иконку. не сработало
+# QMAKE_INFO_PLIST = resource/Info.plist  # подключаем Info.plist
+

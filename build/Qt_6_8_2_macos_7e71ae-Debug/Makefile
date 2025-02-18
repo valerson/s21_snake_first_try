@@ -896,8 +896,11 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resource.cpp
 qrc_resource.cpp: ../../resource/resource.qrc \
 		/Users/valerasomov/Qt/6.8.2/macos/libexec/rcc \
-		../../resource/images/logo_app.ico \
+		../../resource/images/logo_app.icns \
+		../../resource/images/snake_pic.png \
+		../../resource/images/start_img.jpg \
 		../../resource/images/logo_s21.jpg \
+		../../resource/images/start_img_resized.jpg \
 		../../resource/images/background.jpg \
 		../../resource/gif/snake_tetris.gif \
 		../../resource/audio/intro.wav
@@ -932,7 +935,9 @@ controller.o: ../../controller/controller.cpp ../../controller/controller.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
-		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../../controller/controller.cpp
 
 s21_desktop.o: ../../gui/desktop/s21_desktop.cpp ../../gui/desktop/s21_desktop.h \
@@ -971,7 +976,9 @@ s21_desktop.o: ../../gui/desktop/s21_desktop.cpp ../../gui/desktop/s21_desktop.h
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QObject \
-		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qobject.h
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o s21_desktop.o ../../gui/desktop/s21_desktop.cpp
 
 main_desktop.o: ../../main_desktop.cpp /Users/valerasomov/QT/6.8.2/macos/lib/QtWidgets.framework/Headers/QApplication \
@@ -1012,7 +1019,9 @@ main_desktop.o: ../../main_desktop.cpp /Users/valerasomov/QT/6.8.2/macos/lib/QtW
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QObject \
-		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qobject.h
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/valerasomov/QT/6.8.2/macos/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_desktop.o ../../main_desktop.cpp
 
 qrc_resource.o: qrc_resource.cpp 

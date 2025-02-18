@@ -61,5 +61,17 @@ void controller::press_rotate(){
 };
 
 
+void controller::menuStartGame(int msec){
+    QTimer::singleShot(msec, this, []() {
+        qDebug() << "MENUstartGAME";
+        QLabel *temp = new QLabel("ЗАПУСКАЙ ВЫБОР ИГРЫ!!");
+        temp->show();
+    });
+
+};
+
+
+
+
 
 }; /// end namespace s21
